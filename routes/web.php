@@ -19,4 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('students','StudentController');
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+Route::get('logout', 'Auth\LoginController@logout', function () {
+    return abort(404);
+});
 

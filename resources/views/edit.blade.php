@@ -31,10 +31,7 @@
                 <label for="fName"><strong>First Name:</strong></label>
                 <input type="text" class="form-control" name="fname" value="{{ $student->fname }}">
                   @if ($errors->has('fname'))
-
-
                     <small class="text-danger">{{ $errors->first('fname') }}</small>
-
                 @endif <br>
               </div>
         </div>
@@ -44,10 +41,7 @@
                   <label for="lName"><strong>Last Name</strong></label>
                   <input type="text" class="form-control" name="lname"  value="{{ $student->lname }}">
                    @if ($errors->has('lname'))
-
-
                     <small class="text-danger">{{ $errors->first('lname') }}</small>
-
                 @endif <br>
                 </div>
             </div>
@@ -63,10 +57,7 @@
                   <option value="MBA" @if($student->course == 'MBA') selected  @endif  value="{{ $student->course }}">MBA</option>  
                 </select>
                  @if ($errors->has('course'))
-
-
                     <small class="text-danger">{{ $errors->first('course') }}</small>
-
                 @endif <br>
             </div>
         </div>
@@ -94,10 +85,7 @@
             <strong>Birth Date </strong>  
             <input class="form-control datepicker"  type="text" name="dob" value="{{$student->dob}}">
              @if ($errors->has('dob'))
-
-
                     <small class="text-danger">{{ $errors->first('dob') }}</small>
-
                 @endif <br>
          </div>
         </div>
@@ -107,11 +95,8 @@
             <label>Upload File ({{$student->filename}})</label>
             <input type="file" name="filename" value="{{$student->filename}}"><br>
              @if ($errors->has('filename'))
-
-
                     <small class="text-danger">{{ $errors->first('filename') }}</small>
-
-                @endif <br>
+               @endif <br>
          </div>
         </div>
        <div class="row">
@@ -125,10 +110,7 @@
                   <option value="Others" @if($student->gender == 'Others') selected  @endif  value="{{ $student->gender }}">Others</option>  
                 </select>
                  @if ($errors->has('gender'))
-
-
                     <small class="text-danger">{{ $errors->first('gender') }}</small>
-
                 @endif <br>
             </div>
         </div>

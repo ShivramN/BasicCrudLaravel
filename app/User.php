@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
     class User extends Authenticatable
     {
     use Notifiable;
@@ -19,10 +18,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
         }
 
         protected $fillable = [
-        'name', 'email', 'password','type'
+        'name', 'email', 'password','type','verification_code','verified'
         ];
 
         protected $hidden = [
         'password', 'remember_token',
         ];
+
+         public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
     }

@@ -138,23 +138,23 @@ class StudentController extends Controller
 
 
     ]);
-         if($request->hasfile('filename'))
-         {
-            $file = $request->file('filename');
-            $name=time().$file->getClientOriginalName();
-            $file->move(public_path().'/images/', $name);
-         }
-             $student= \App\Student::find($id);
-             $student->fname=$request->get('fname');
-             $student->lname=$request->get('lname');
-             $student->course=$request->get('course');
-             $student->semester=$request->get('semester');
-             $student->dob = date('d-m-Y', strtotime($request->get('dob')));
-             $student->filename=$name;
-             $student->gender=$request->get('gender');
-             $student->save();
-             return redirect('students');
-    }
+             if($request->hasfile('filename'))
+             {
+                $file = $request->file('filename');
+                $name=time().$file->getClientOriginalName();
+                $file->move(public_path().'/images/', $name);
+             }
+                 $student= \App\Student::find($id);
+                 $student->fname=$request->get('fname');
+                 $student->lname=$request->get('lname');
+                 $student->course=$request->get('course');
+                 $student->semester=$request->get('semester');
+                 $student->dob = date('d-m-Y', strtotime($request->get('dob')));
+                 $student->filename=$name;
+                 $student->gender=$request->get('gender');
+                 $student->save();
+                 return redirect('students');
+        }
 
     /**
      * Remove the specified resource from storage.
