@@ -1,57 +1,50 @@
 @extends('layouts.app')
 
+@if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+@endif
 
-
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 @section('content')
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Laravel 5.6 CRUD Tutorial With Example </title>
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script> 
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet">
-  </head>
-  <body>
+        <meta charset="utf-8">
+        <title>Laravel 5.6 CRUD Tutorial With Example </title>
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script> 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css" rel="stylesheet">
+   </head>
+   <body>
      <div class="container" style="background-color: #ffffcc">
-      <h2 style="padding-top: 20px;">Student Registration System</h2><br/>
-
-      <form method="post" action="{{action('StudentController@update', $id)}}" enctype="multipart/form-data">
-        @csrf
-         @if ($errors->any())
-          <div class="alert alert-danger">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-      @endif
-         <input name="_method" type="hidden" value="PATCH">
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="form-group col-md-4">
-            <label for="fName"><strong>First Name:</strong></label>
-            <input type="text" class="form-control" name="fname" value="{{ $student->fname }}"><br>
-          </div>
+          <h2 style="padding-top: 20px;">Student Registration System</h2><br/>
+          <form method="post" action="{{action('StudentController@update', $id)}}" enctype="multipart/form-data">
+          @csrf
+       
+           <input name="_method" type="hidden" value="PATCH">
+          <div class="row">
+            <div class="col-md-4"></div>
+              <div class="form-group col-md-4">
+                <label for="fName"><strong>First Name:</strong></label>
+                <input type="text" class="form-control" name="fname" value="{{ $student->fname }}">
+                  @if ($errors->has('fname'))
+                    <small class="text-danger">{{ $errors->first('fname') }}</small>
+                @endif <br>
+              </div>
         </div>
-        <div class="row">
-          <div class="col-md-4"></div>
-            <div class="form-group col-md-4">
-              <label for="lName"><strong>Last Name</strong></label>
-              <input type="text" class="form-control" name="lname"  value="{{ $student->lname }}"><br>
+          <div class="row">
+            <div class="col-md-4"></div>
+                <div class="form-group col-md-4">
+                  <label for="lName"><strong>Last Name</strong></label>
+                  <input type="text" class="form-control" name="lname"  value="{{ $student->lname }}">
+                   @if ($errors->has('lname'))
+                    <small class="text-danger">{{ $errors->first('lname') }}</small>
+                @endif <br>
+                </div>
             </div>
-          </div>
            <div class="row">
           <div class="col-md-4"></div>
             <div class="form-group col-md-4">
@@ -63,6 +56,9 @@
                   <option value="BMS"  @if($student->course == 'BMS') selected  @endif  value="{{ $student->course }}">BMS</option>  
                   <option value="MBA" @if($student->course == 'MBA') selected  @endif  value="{{ $student->course }}">MBA</option>  
                 </select>
+                 @if ($errors->has('course'))
+                    <small class="text-danger">{{ $errors->first('course') }}</small>
+                @endif <br>
             </div>
         </div>
         <div class="row">
@@ -78,20 +74,29 @@
                   <option value="5"   @if($student->semester == '5') selected  @endif  value="{{ $student->semester }}">&#8548;</option> 
                   <option value="6"  @if($student->semester == '6') selected  @endif  value="{{ $student->semester }}">&#8549;</option>   
                 </select>
+                 @if ($errors->has('semester'))
+                    <small class="text-danger">{{ $errors->first('semester') }}</small>
+                @endif <br>
             </div>
         </div>
         <div class="row">
           <div class="col-md-4"></div>
           <div class="form-group col-md-4">
             <strong>Birth Date </strong>  
-            <input class="form-control datepicker"  type="text" name="dob" value="{{$student->dob}}"><br>  
+            <input class="form-control datepicker"  type="text" name="dob" value="{{$student->dob}}">
+             @if ($errors->has('dob'))
+                    <small class="text-danger">{{ $errors->first('dob') }}</small>
+                @endif <br>
          </div>
         </div>
          <div class="row">
           <div class="col-md-4"></div>
           <div class="form-group col-md-4">
             <label>Upload File ({{$student->filename}})</label>
-            <input type="file" name="filename"><br><br>    
+            <input type="file" name="filename" value="{{$student->filename}}"><br>
+             @if ($errors->has('filename'))
+                    <small class="text-danger">{{ $errors->first('filename') }}</small>
+               @endif <br>
          </div>
         </div>
        <div class="row">
@@ -104,16 +109,19 @@
                   <option value="Female" @if($student->gender == 'Female') selected  @endif  value="{{ $student->gender }}">Female</option>  
                   <option value="Others" @if($student->gender == 'Others') selected  @endif  value="{{ $student->gender }}">Others</option>  
                 </select>
+                 @if ($errors->has('gender'))
+                    <small class="text-danger">{{ $errors->first('gender') }}</small>
+                @endif <br>
             </div>
         </div>
         <div class="row">
-          <div class="col-md-4"></div>
-          <div class="form-group col-md-4" style="margin-top:20px">
-            <button type="submit" class="btn btn-success">Submit</button>
-          </div>
+              <div class="col-md-4"></div>
+              <div class="form-group col-md-4" style="margin-top:20px">
+                <button type="submit" class="btn btn-success">Submit</button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
   <script type="text/javascript">
  jQuery(document).ready(function($) {
         $('.datepicker').datepicker({
@@ -126,3 +134,4 @@
 </html>
 
 @endsection
+
